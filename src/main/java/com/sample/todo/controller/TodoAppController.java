@@ -46,7 +46,7 @@ public class TodoAppController {
     @RequestMapping(value = "/del", method = { RequestMethod.GET, RequestMethod.POST })
     String del(Model model) {
         List<TodoApp> todoList = service.getTodoAppList();
-        model.addAttribute("todoList", todoList);// ここの"todoList"というキーがindex.htmlで参照されている
+        model.addAttribute("todoList", todoList);// ここの"todoList"というキーがdelete.htmlで参照されている
         return "delete";
     }
 }

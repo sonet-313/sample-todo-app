@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th> </th>
+                <th> </th>
                 <th>#</th>
                 <th>Title</th>
                 <th>Detail</th>
@@ -24,8 +25,10 @@
         </thead>
         <tbody>
             <tr th:each="result : ${todoList}">
+                <!--  ">" ではなく "/>" にしないとエラーになる。原因は不明 -->
+                <td><input type="radio" name = "todotable"/></td>
+                <td><input type="checkbox" /></td> 
                 <!--tymeleafの記述方法 -->
-                <td><input type="checkbox" /></td>
                 <td class="todo-id" th:text="${result['todoId']}"></td>
                 <td class="title" th:text="${result['title']}"></td>
                 <td class="detail" th:text="${result['detail']}"></td>
