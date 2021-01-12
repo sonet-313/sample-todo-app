@@ -46,4 +46,11 @@ public class TodoAppDao {
         paramMap.addValue("selectId", selectId);
         jdbcTemplate.update("DELETE FROM TODO_APP WHERE TODO_ID= :selectId", paramMap);
     }
+    // データベースの行数取得
+    public int getRowCount() {
+        int rowCount = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM TODO_APP;",
+                new MapSqlParameterSource(null), Integer.class);
+        return rowCount;
+    }
+
 }
