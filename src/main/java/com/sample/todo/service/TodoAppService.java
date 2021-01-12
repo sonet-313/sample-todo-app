@@ -34,4 +34,8 @@ public class TodoAppService {
     public void delete(int selectId) {
         dao.delete(selectId);
     }
+
+    public int getRowCount(){
+        return dao.getRowCount();
+    }
 }
