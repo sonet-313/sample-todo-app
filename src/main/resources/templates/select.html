@@ -9,33 +9,34 @@
 </head>
 
 <body>
-    <h1>Del Todo</h1>
+    <h1>Select Todo</h1>
     <div class="operation-area">
         <button type="button" onclick="location.href='./index'">Back to Index</button>
     </div>
-    <table>
-        <thead>
-            <tr>
-                <th> </th>
-                <th> </th>
-                <th>#</th>
-                <th>Title</th>
-                <th>Detail</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="result : ${todoList}">
-                <!--  ">" ではなく "/>" にしないとエラーになる。原因は不明 -->
-                <td><input type="radio" name = "todotable"/></td>
-                <td><input type="checkbox" /></td> 
-                <!--tymeleafの記述方法 -->
-                <td class="todo-id" th:text="${result['todoId']}"></td>
-                <td class="title" th:text="${result['title']}"></td>
-                <td class="detail" th:text="${result['detail']}"></td>
+    <form method="POST" action="./delete">
+        <table>
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="result : ${todoList}">
+                    <!--  ">" ではなく "/>" にしないとエラーになる。原因は不明 -->
+                    <td><input type="radio" name = "selectId" th:value = "${result['todoId']}"/></td>
+                    <!--tymeleafの記述方法 -->
+                    <td class="todo-id" th:text="${result['todoId']}"></td>
+                    <td class="title" th:text="${result['title']}"></td>
+                    <td class="detail" th:text="${result['detail']}"></td>
 
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+            </tbody>
+        </table>
+        <input class="button" type="submit" value="Delete"></input>
+    </form>
 </body>
 
 </html>

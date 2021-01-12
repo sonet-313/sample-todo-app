@@ -15,8 +15,17 @@ public class TodoApp implements Serializable {
     private int todoId;
     private String title;
     private String detail;
+    private int selectId;
 
     public TodoApp() {
+    }
+
+    public int getSelectId() {
+        return selectId;
+    }
+
+    public void setSelectId(int selectId) {
+        this.selectId = selectId;
     }
 
     public int getTodoId() {
