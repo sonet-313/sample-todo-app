@@ -52,7 +52,7 @@ public class TodoAppController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     String delete(@ModelAttribute TodoApp todoApp, Model model) {
-        System.out.println(todoApp.getSelectId());
+        service.delete(todoApp.getSelectId());
         return "redirect:index";// 登録したらindexに移る
     }
 }
