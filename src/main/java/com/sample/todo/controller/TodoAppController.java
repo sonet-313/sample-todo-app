@@ -46,13 +46,14 @@ public class TodoAppController {
     @RequestMapping(value = "/sel", method = RequestMethod.GET)
     String select(Model model) {
         List<TodoApp> todoList = service.getTodoAppList();
-        model.addAttribute("todoList", todoList);// ここの"todoList"というキーがdelete.htmlで参照されている
+        model.addAttribute("todoList", todoList);// ここの"todoList"というキーがselect.htmlで参照されている
         return "select";
     }
 
+    // /selectでdeleteボタンを押した時の処理
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     String delete(@ModelAttribute TodoApp todoApp, Model model) {
         service.delete(todoApp.getSelectId());
-        return "redirect:index";// 登録したらindexに移る
+        return "redirect:index";// 削除したらindexに移る
     }
 }

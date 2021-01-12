@@ -27,7 +27,14 @@ public class TodoAppService {
     }
 
     public void register(String title, String detail) {
-        int nextId = dao.getNextId();
+        int rowCount = dao.getRowCount();
+        // todoを全て削除するとNextIdが取得できなくなるエラーを回避するために1を渡す
+        int nextId;
+        if (rowCount == 0){
+            nextId = 1;
+        } else{
+            nextId = dao.getNextId();
+        }
         dao.insert(nextId, title, detail);
     }
 
