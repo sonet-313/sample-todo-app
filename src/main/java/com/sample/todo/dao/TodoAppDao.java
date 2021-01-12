@@ -39,4 +39,11 @@ public class TodoAppDao {
         paramMap.addValue("detail", detail);
         jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail)", paramMap);
     }
+
+    //ラジオボタンでチェックしたidのタスクをSQL文でデータベースから削除
+    public void delete(int selectId) {
+        MapSqlParameterSource paramMap = new MapSqlParameterSource();
+        paramMap.addValue("selectId", selectId);
+        jdbcTemplate.update("DELETE FROM TODO_APP WHERE TODO_ID= :selectId", paramMap);
+    }
 }
