@@ -64,4 +64,9 @@ public class TodoAppService {
     public String currentDetail(int selectRow, List<TodoApp> todoList){
         return todoList.get(selectRow).getDetail();
     }
+
+    //更新
+    public void update(int todoId, String title, String detail) {
+        dao.update(todoId, title, detail);
+    }
 }

@@ -53,4 +53,12 @@ public class TodoAppDao {
         return rowCount;
     }
 
+    public void update(int todoId, String title, String detail) {
+        MapSqlParameterSource paramMap = new MapSqlParameterSource();
+        paramMap.addValue("todoId", todoId);
+        paramMap.addValue("title", title);
+        paramMap.addValue("detail", detail);
+        jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail WHERE TODO_ID = :todoId", paramMap);
+    }
+
 }

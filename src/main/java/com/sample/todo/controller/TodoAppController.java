@@ -60,11 +60,19 @@ public class TodoAppController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     String edit(@ModelAttribute TodoApp todoApp,Model model) {
         List<TodoApp> todoList = service.getTodoAppList();
-        int selectRow = service.findRowFromId(todoApp.getSelectId(), todoList);
+        int Id = todoApp.getSelectId();
+        int selectRow = service.findRowFromId(Id, todoList);
         String currentTitle = service.currentTitle(selectRow, todoList);
         String currentDetail = service.currentDetail(selectRow, todoList);
+        model.addAttribute("Id", Id);
         model.addAttribute("currentTitle", currentTitle);// edit.htmlで編集前のタイトルを参照
         model.addAttribute("currentDetail", currentDetail);// edit.htmlで編集前のタイトルを参照
         return "edit";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    String update(@ModelAttribute TodoApp todoApp, Model model) {
+        service.update(todoApp.getTodoId(),todoApp.getTitle(),todoApp.getDetail());
+        return "redirect:index";// 登録したらindexに移る
     }
 }
