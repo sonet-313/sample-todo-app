@@ -12,6 +12,7 @@
     <h1>Edit Todo</h1>
 
     <form method="POST" action="./update">
+        <input type = "hidden" name = "todoId" th:value = "${Id}"/>
         <ul>
             <li>
                 <label for="title">Title</label>
