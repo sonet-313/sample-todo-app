@@ -56,4 +56,15 @@ public class TodoAppController {
         service.delete(todoApp.getSelectId());
         return "redirect:index";// 削除したらindexに移る
     }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    String edit(@ModelAttribute TodoApp todoApp,Model model) {
+        List<TodoApp> todoList = service.getTodoAppList();
+        int selectRow = service.findRowFromId(todoApp.getSelectId(), todoList);
+        String currentTitle = service.currentTitle(selectRow, todoList);
+        String currentDetail = service.currentDetail(selectRow, todoList);
+        model.addAttribute("currentTitle", currentTitle);// edit.htmlで編集前のタイトルを参照
+        model.addAttribute("currentDetail", currentDetail);// edit.htmlで編集前のタイトルを参照
+        return "edit";
+    }
 }
