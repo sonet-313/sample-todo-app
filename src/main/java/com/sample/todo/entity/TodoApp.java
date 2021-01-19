@@ -15,19 +15,18 @@ public class TodoApp implements Serializable {
     private int todoId;
     private String title;
     private String detail;
-    private int selectId;
+    private int[] deleteId;
 
     public TodoApp() {
     }
 
-    public int getSelectId() {
-        return selectId;
+    public int[] getDeleteId() {
+        return deleteId;
     }
 
-    public void setSelectId(int selectId) {
-        this.selectId = selectId;
+    public void setDeleteId(int[] deleteId) {
+        this.deleteId = deleteId;
     }
-
     public int getTodoId() {
         return this.todoId;
     }

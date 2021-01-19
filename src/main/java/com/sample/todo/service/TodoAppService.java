@@ -38,33 +38,11 @@ public class TodoAppService {
         dao.insert(nextId, title, detail);
     }
 
-    public void delete(int selectId) {
-        dao.delete(selectId);
-    }
-
-    public int getRowCount(){
-        return dao.getRowCount();
-    }
-    //editの時に選択されたidから行番号を返す関数
-    public int findRowFromId(int selectId, List<TodoApp> todoList){
-        int selectRow = -1;
-        for(int i = 0; i < todoList.size(); i++){
-            if(todoList.get(i).getTodoId() == selectId){
-                selectRow = i;
-                break;
-            }
+    public void delete(int[] deleteId) {
+        for (int todoId : deleteId){
+            dao.delete(todoId);
         }
-        return selectRow;
     }
-    //行番号からTitleを取得
-    public String currentTitle(int selectRow, List<TodoApp> todoList){
-        return todoList.get(selectRow).getTitle();
-    }
-    //行番号からdetailを取得
-    public String currentDetail(int selectRow, List<TodoApp> todoList){
-        return todoList.get(selectRow).getDetail();
-    }
-
     //更新
     public void update(int todoId, String title, String detail) {
         dao.update(todoId, title, detail);

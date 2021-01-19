@@ -53,17 +53,17 @@ public class TodoAppController {
     // /selectでdeleteボタンを押した時の処理
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     String delete(@ModelAttribute TodoApp todoApp, Model model) {
-        service.delete(todoApp.getSelectId());
+        if (todoApp.getDeleteId() != null){
+            service.delete(todoApp.getDeleteId());
+        }
         return "redirect:index";// 削除したらindexに移る
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     String edit(@ModelAttribute TodoApp todoApp,Model model) {
-        List<TodoApp> todoList = service.getTodoAppList();
-        int Id = todoApp.getSelectId();
-        int selectRow = service.findRowFromId(Id, todoList);
-        String currentTitle = service.currentTitle(selectRow, todoList);
-        String currentDetail = service.currentDetail(selectRow, todoList);
+        int Id = todoApp.getTodoId();
+        String currentTitle = todoApp.getTitle();
+        String currentDetail = todoApp.getDetail();
         model.addAttribute("Id", Id);
         model.addAttribute("currentTitle", currentTitle);// edit.htmlで編集前のタイトルを参照
         model.addAttribute("currentDetail", currentDetail);// edit.htmlで編集前のタイトルを参照
