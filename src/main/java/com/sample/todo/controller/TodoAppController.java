@@ -75,4 +75,11 @@ public class TodoAppController {
         service.update(todoApp.getTodoId(),todoApp.getTitle(),todoApp.getDetail());
         return "redirect:index";// 登録したらindexに移る
     }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    String search(@ModelAttribute TodoApp todoApp, Model model) {
+        List<TodoApp> searchResult =service.search(todoApp.getSearchArea(),todoApp.getSearchKeyword());
+        model.addAttribute("todoList", searchResult);// ここの"todoList"というキーがindex.htmlで参照されている
+        return "index";// 登録したらindexに移る
+    }
 }

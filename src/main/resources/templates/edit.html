@@ -16,13 +16,13 @@
         <ul>
             <li>
                 <label for="title">Title</label>
-                <input id="title" type="text" name="title" th:value="${currentTitle}"  maxlength="30"></input>
+                <input id="title" type="text" name="title" th:value="${currentTitle}" maxlength="30"></input>
             </li>
             <li>
                 <label for="detail">Detail</label>
-                <textarea id="detail" type="text" name="detail" th:text="${currentDetail}"></textarea>
+                <textarea id="detail" type="text" name="detail" th:text="${currentDetail}" maxlength="100"></textarea>
             </li>
-            <li><input class="button" type="submit" value="Update" maxlength="100"></input></li>
+            <li><input class="button" type="submit" value="Update" ></input></li>
         </ul>
     </form>
 </body>

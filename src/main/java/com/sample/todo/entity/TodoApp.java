@@ -16,8 +16,26 @@ public class TodoApp implements Serializable {
     private String title;
     private String detail;
     private int[] deleteId;
+    private String searchArea;
+    private String searchKeyword;
 
     public TodoApp() {
+    }
+
+    public String getSearchKeyword() {
+        return searchKeyword;
+    }
+
+    public void setSearchKeyword(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
+    }
+
+    public String getSearchArea() {
+        return searchArea;
+    }
+
+    public void setSearchArea(String searchArea) {
+        this.searchArea = searchArea;
     }
 
     public int[] getDeleteId() {

@@ -61,4 +61,25 @@ public class TodoAppDao {
         jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail WHERE TODO_ID = :todoId", paramMap);
     }
 
+	public List<TodoApp> searchAll(String searchKeyword) {
+        MapSqlParameterSource paramMap = new MapSqlParameterSource();
+        paramMap.addValue("searchKeyword", "%"+searchKeyword+"%");
+        List<TodoApp> searchResult = jdbcTemplate.query("SELECT * FROM TODO_APP WHERE TODO_ID LIKE :searchKeyword OR TITLE LIKE :searchKeyword OR DETAIL LIKE :searchKeyword", paramMap,
+                new TodoAppRowMapper());
+		return searchResult;
+	}
+
+	public List<TodoApp> searchId(String searchKeyword) {
+		return null;
+	}
+
+	public List<TodoApp> searchTitle(String searchKeyword) {
+		return null;
+	}
+
+	public List<TodoApp> searchDetail(String searchKeyword) {
+		return null;
+	}
+
+
 }

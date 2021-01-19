@@ -47,4 +47,20 @@ public class TodoAppService {
     public void update(int todoId, String title, String detail) {
         dao.update(todoId, title, detail);
     }
+
+    //検索
+    public List<TodoApp> search(String searchArea, String searchKeyword){
+        if(searchArea.equals("All")){
+            return dao.searchAll(searchKeyword);
+        }else if(searchArea.equals("#")){
+            return dao.searchId(searchKeyword);
+        }else if(searchArea.equals("Title")){
+            return dao.searchTitle(searchKeyword);
+        }else if(searchArea.equals("Detail")){
+            return dao.searchDetail(searchKeyword);
+        }else{
+            return null;
+        }
+        
+    }
 }
