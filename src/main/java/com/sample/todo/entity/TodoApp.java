@@ -1,6 +1,7 @@
 package com.sample.todo.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * TODO_APPテーブルに該当するエンティティクラス<br>
@@ -18,8 +19,17 @@ public class TodoApp implements Serializable {
     private int[] deleteId;
     private String searchArea;
     private String searchKeyword;
+    private Date date;
 
     public TodoApp() {
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getSearchKeyword() {

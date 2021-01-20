@@ -39,6 +39,7 @@ public class TodoAppController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     String register(@ModelAttribute TodoApp todoApp, Model model) {
+        System.out.println(todoApp.getDate());
         service.register(todoApp.getTitle(), todoApp.getDetail());
         return "redirect:index";// 登録したらindexに移る
     }
@@ -59,7 +60,7 @@ public class TodoAppController {
         return "redirect:index";// 削除したらindexに移る
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/edit", method = { RequestMethod.GET, RequestMethod.POST })
     String edit(@ModelAttribute TodoApp todoApp,Model model) {
         int Id = todoApp.getTodoId();
         String currentTitle = todoApp.getTitle();
