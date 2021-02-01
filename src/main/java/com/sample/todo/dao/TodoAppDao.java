@@ -60,7 +60,7 @@ public class TodoAppDao {
         paramMap.addValue("title", title);
         paramMap.addValue("detail", detail);
         paramMap.addValue("date", date);
-        jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail, DEADLINE = :date, WHERE TODO_ID = :todoId", paramMap);
+        jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail, DEADLINE = :date WHERE TODO_ID = :todoId", paramMap);
     }
 
 	public List<TodoApp> searchAll(String searchKeyword) {

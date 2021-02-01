@@ -1,7 +1,7 @@
 package com.sample.todo.controller;
 
 import java.util.List;
-
+import java.sql.Date;
 import com.sample.todo.entity.TodoApp;
 import com.sample.todo.service.TodoAppService;
 
@@ -64,13 +64,15 @@ public class TodoAppController {
         int Id = todoApp.getTodoId();
         String currentTitle = todoApp.getTitle();
         String currentDetail = todoApp.getDetail();
+        Date currentDate = todoApp.getDate();
         model.addAttribute("Id", Id);
         model.addAttribute("currentTitle", currentTitle);// edit.htmlで編集前のタイトルを参照
-        model.addAttribute("currentDetail", currentDetail);// edit.htmlで編集前のタイトルを参照
+        model.addAttribute("currentDetail", currentDetail);
+        model.addAttribute("currentDate", currentDate);
         return "edit";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = { RequestMethod.GET, RequestMethod.POST })
     String update(@ModelAttribute TodoApp todoApp, Model model) {
         service.update(todoApp.getTodoId(),todoApp.getTitle(),todoApp.getDetail(),todoApp.getDate());
         return "redirect:index";// 登録したらindexに移る

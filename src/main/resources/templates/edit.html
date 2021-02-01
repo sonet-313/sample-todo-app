@@ -11,7 +11,7 @@
 <body>
     <h1>Edit Todo</h1>
 
-    <form method="POST" action="./update">
+    <form method="GET" action="./update">
         <input type = "hidden" name = "todoId" th:value = "${Id}"/>
         <ul>
             <li>
@@ -21,6 +21,10 @@
             <li>
                 <label for="detail">Detail</label>
                 <textarea id="detail" type="text" name="detail" th:text="${currentDetail}" maxlength="100"></textarea>
+            </li>
+            <li>
+                <label for = "date">Date</label>
+                <input type="date" name = "date" th:value = "${currentDate}"></input>
             </li>
             <li><input class="button" type="submit" value="Update" ></input></li>
         </ul>
