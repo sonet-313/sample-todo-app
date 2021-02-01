@@ -1,7 +1,7 @@
 package com.sample.todo.dao;
 
-import java.util.List;
-
+import java.util.*;
+import java.sql.Date;
 import com.sample.todo.entity.TodoApp;
 import com.sample.todo.entity.TodoAppRowMapper;
 
@@ -32,12 +32,13 @@ public class TodoAppDao {
         return ++maxTodoId;
     }
 
-    public <T> void insert(int todoId, String title, String detail) {
+    public <T> void insert(int todoId, String title, String detail, Date date ) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("todoId", todoId);
         paramMap.addValue("title", title);
         paramMap.addValue("detail", detail);
-        jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail)", paramMap);
+        paramMap.addValue("date", date);
+        jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail, :date)", paramMap);
     }
 
     //ラジオボタンでチェックしたidのタスクをSQL文でデータベースから削除
@@ -53,12 +54,13 @@ public class TodoAppDao {
         return rowCount;
     }
 
-    public void update(int todoId, String title, String detail) {
+    public void update(int todoId, String title, String detail, Date date) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("todoId", todoId);
         paramMap.addValue("title", title);
         paramMap.addValue("detail", detail);
-        jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail WHERE TODO_ID = :todoId", paramMap);
+        paramMap.addValue("date", date);
+        jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail, DEADLINE = :date, WHERE TODO_ID = :todoId", paramMap);
     }
 
 	public List<TodoApp> searchAll(String searchKeyword) {

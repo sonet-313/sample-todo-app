@@ -37,10 +37,9 @@ public class TodoAppController {
         return "detail";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = { RequestMethod.GET, RequestMethod.POST })
     String register(@ModelAttribute TodoApp todoApp, Model model) {
-        System.out.println(todoApp.getDate());
-        service.register(todoApp.getTitle(), todoApp.getDetail());
+        service.register(todoApp.getTitle(), todoApp.getDetail(), todoApp.getDate());
         return "redirect:index";// 登録したらindexに移る
     }
 
@@ -73,7 +72,7 @@ public class TodoAppController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     String update(@ModelAttribute TodoApp todoApp, Model model) {
-        service.update(todoApp.getTodoId(),todoApp.getTitle(),todoApp.getDetail());
+        service.update(todoApp.getTodoId(),todoApp.getTitle(),todoApp.getDetail(),todoApp.getDate());
         return "redirect:index";// 登録したらindexに移る
     }
 

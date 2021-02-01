@@ -1,7 +1,7 @@
 package com.sample.todo.service;
 
-import java.util.List;
-
+import java.util.*;
+import java.sql.Date;
 import com.sample.todo.dao.TodoAppDao;
 import com.sample.todo.entity.TodoApp;
 
@@ -26,7 +26,7 @@ public class TodoAppService {
         return dao.getTodoAppList();
     }
 
-    public void register(String title, String detail) {
+    public void register(String title, String detail, Date date) {
         int rowCount = dao.getRowCount();
         // todoを全て削除するとNextIdが取得できなくなるエラーを回避するために1を渡す
         int nextId;
@@ -35,7 +35,7 @@ public class TodoAppService {
         } else{
             nextId = dao.getNextId();
         }
-        dao.insert(nextId, title, detail);
+        dao.insert(nextId, title, detail, date);
     }
 
     public void delete(int[] deleteId) {
@@ -44,8 +44,8 @@ public class TodoAppService {
         }
     }
     //更新
-    public void update(int todoId, String title, String detail) {
-        dao.update(todoId, title, detail);
+    public void update(int todoId, String title, String detail, Date date) {
+        dao.update(todoId, title, detail,date);
     }
 
     //検索

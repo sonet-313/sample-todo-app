@@ -1,7 +1,7 @@
 package com.sample.todo.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * TODO_APPテーブルに該当するエンティティクラス<br>
