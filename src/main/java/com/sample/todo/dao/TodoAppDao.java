@@ -55,12 +55,12 @@ public class TodoAppDao {
     }
 
     public void update(int todoId, String title, String detail, Date date) {
-        MapSqlParameterSource paramMap = new MapSqlParameterSource();
-        paramMap.addValue("todoId", todoId);
-        paramMap.addValue("title", title);
-        paramMap.addValue("detail", detail);
-        paramMap.addValue("date", date);
-        jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail, DEADLINE = :date WHERE TODO_ID = :todoId", paramMap);
+            MapSqlParameterSource paramMap = new MapSqlParameterSource();
+            paramMap.addValue("todoId", todoId);
+            paramMap.addValue("title", title);
+            paramMap.addValue("detail", detail);
+            paramMap.addValue("date", date);
+            jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail, DEADLINE = :date WHERE TODO_ID = :todoId", paramMap);
     }
 
 	public List<TodoApp> searchAll(String searchKeyword) {
@@ -80,7 +80,7 @@ public class TodoAppDao {
 	}
 
 	public List<TodoApp> searchTitle(String searchKeyword) {
-		MapSqlParameterSource paramMap = new MapSqlParameterSource();
+	MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("searchKeyword", "%"+searchKeyword.toUpperCase()+"%");//大文字小文字区別せずに検索
         List<TodoApp> searchResult = jdbcTemplate.query("SELECT * FROM TODO_APP WHERE UPPER(TITLE) LIKE :searchKeyword", paramMap,
                 new TodoAppRowMapper());
@@ -93,7 +93,26 @@ public class TodoAppDao {
         List<TodoApp> searchResult = jdbcTemplate.query("SELECT * FROM TODO_APP WHERE UPPER(DETAIL) LIKE :searchKeyword", paramMap,
                 new TodoAppRowMapper());
 		return searchResult;
-	}
+        }
+        
+        //並べ替え
+        public List<TodoApp> sort(String sortArea) {
+                MapSqlParameterSource paramMap = new MapSqlParameterSource();
+                if(sortArea.equals("TITLE")){
+                        List<TodoApp> sortResult = jdbcTemplate.query("SELECT * FROM TODO_APP ORDER BY TITLE", paramMap,
+                        new TodoAppRowMapper());
+                        return sortResult;
+                }else if(sortArea.equals("DETAIL")){
+                        List<TodoApp> sortResult = jdbcTemplate.query("SELECT * FROM TODO_APP ORDER BY DETAIL", paramMap,
+                        new TodoAppRowMapper());
+                        return sortResult;
+                }else{
+                        List<TodoApp> sortResult = jdbcTemplate.query("SELECT * FROM TODO_APP ORDER BY TODO_ID", paramMap,
+                        new TodoAppRowMapper());
+                        return sortResult;
+
+                }
+        }
 
 
 }

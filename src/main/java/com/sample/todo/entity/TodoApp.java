@@ -20,8 +20,17 @@ public class TodoApp implements Serializable {
     private String searchArea;
     private String searchKeyword;
     private Date date;
+    private String sortArea;
 
     public TodoApp() {
+    }
+
+    public String getSortArea() {
+        return sortArea;
+    }
+
+    public void setSortArea(String sortArea) {
+        this.sortArea = sortArea;
     }
 
     public Date getDate() {

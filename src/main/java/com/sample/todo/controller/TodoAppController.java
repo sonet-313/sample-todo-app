@@ -84,4 +84,13 @@ public class TodoAppController {
         model.addAttribute("todoList", searchResult);// ここの"todoList"というキーがindex.htmlで参照されている
         return "index";// 登録したらindexに移る
     }
+
+    @RequestMapping(value = "/sort", method = RequestMethod.POST)
+    String sort(@ModelAttribute TodoApp todoApp, Model model) {
+        System.out.println(todoApp.getSortArea());
+        System.out.println(" ");
+        List<TodoApp> sortResult =service.sort(todoApp.getSortArea());
+        model.addAttribute("todoList", sortResult);// ここの"todoList"というキーがindex.htmlで参照されている
+        return "index";// 登録したらindexに移る
+    }
 }

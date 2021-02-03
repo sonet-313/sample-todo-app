@@ -15,13 +15,20 @@
         <button type="button" onclick="location.href='./sel'">Delete Todo</button>
     </div>
     <form action="/search" method="post">
-        <div><input type="search" name="searchKeyword" placeholder="input search keyword"/>
-        <input type="submit" name="submit" value="Search"/></div>
         Search in 
         <input type="radio" name="searchArea" value="All" checked = "checked"/>All
         <input type="radio" name="searchArea" value="#"/>#
         <input type="radio" name="searchArea" value="Title"/>Title
         <input type="radio" name="searchArea" value="Detail"/>Detail
+        <div><input type="search" name="searchKeyword" placeholder="input search keyword"/>
+            <input type="submit" name="submit" value="Search"/></div>
+      </form>
+      <form action="/sort" method="post">
+        Sort by
+        <input type="radio" name="sortArea" value="TODO_ID"/>#
+        <input type="radio" name="sortArea" value="TITLE"/>Title
+        <input type="radio" name="sortArea" value="DETAIL"/>Detail
+        <input type="submit" name="submit" value="Sort"/>
       </form>
     <table>
         <thead>

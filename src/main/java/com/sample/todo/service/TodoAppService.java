@@ -63,4 +63,9 @@ public class TodoAppService {
         }
         
     }
+
+    //並べ替え
+    public List<TodoApp> sort(String sortArea){
+        return dao.sort(sortArea);
+    }
 }
