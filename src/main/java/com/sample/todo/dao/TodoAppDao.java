@@ -42,10 +42,10 @@ public class TodoAppDao {
     }
 
     //ラジオボタンでチェックしたidのタスクをSQL文でデータベースから削除
-    public void delete(int selectId) {
+    public void delete(int deleteId) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
-        paramMap.addValue("selectId", selectId);
-        jdbcTemplate.update("DELETE FROM TODO_APP WHERE TODO_ID= :selectId", paramMap);
+        paramMap.addValue("deleteId", deleteId);
+        jdbcTemplate.update("DELETE FROM TODO_APP WHERE TODO_ID= :deleteId", paramMap);
     }
     // データベースの行数取得
     public int getRowCount() {
@@ -99,6 +99,7 @@ public class TodoAppDao {
         public List<TodoApp> sort(String sortArea) {
                 MapSqlParameterSource paramMap = new MapSqlParameterSource();
                 if(sortArea.equals("TITLE")){
+                        paramMap.addValue("Title", "TITLE");
                         List<TodoApp> sortResult = jdbcTemplate.query("SELECT * FROM TODO_APP ORDER BY TITLE", paramMap,
                         new TodoAppRowMapper());
                         return sortResult;

@@ -38,7 +38,7 @@ public class TodoAppService {
         dao.insert(nextId, title, detail, date);
     }
 
-    public void delete(int[] deleteId) {
+    public void delete(ArrayList<Integer> deleteId) {
         for (int todoId : deleteId){
             dao.delete(todoId);
         }

@@ -2,6 +2,7 @@ package com.sample.todo.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * TODO_APPテーブルに該当するエンティティクラス<br>
@@ -16,7 +17,7 @@ public class TodoApp implements Serializable {
     private int todoId;
     private String title;
     private String detail;
-    private int[] deleteId;
+    private ArrayList<String> deleteIds;
     private String searchArea;
     private String searchKeyword;
     private Date date;
@@ -57,12 +58,12 @@ public class TodoApp implements Serializable {
         this.searchArea = searchArea;
     }
 
-    public int[] getDeleteId() {
-        return deleteId;
+    public ArrayList<String> getDeleteIds() {
+        return deleteIds;
     }
 
-    public void setDeleteId(int[] deleteId) {
-        this.deleteId = deleteId;
+    public void setDeleteId(ArrayList<String> deleteIds) {
+        this.deleteIds = deleteIds;
     }
     public int getTodoId() {
         return this.todoId;

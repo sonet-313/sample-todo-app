@@ -1,6 +1,7 @@
 package com.sample.todo.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.sql.Date;
 import com.sample.todo.entity.TodoApp;
 import com.sample.todo.service.TodoAppService;
@@ -51,10 +52,24 @@ public class TodoAppController {
     }
 
     // /selectでdeleteボタンを押した時の処理
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
     String delete(@ModelAttribute TodoApp todoApp, Model model) {
-        if (todoApp.getDeleteId() != null){
-            service.delete(todoApp.getDeleteId());
+        ArrayList<String> strDeleteIds = todoApp.getDeleteIds();
+        if (strDeleteIds != null){
+            ArrayList<Integer> deleteIds = new ArrayList<Integer>();
+            for(int i = 0;i < strDeleteIds.size();i++){
+                try{
+                    int deleteId = Integer.parseInt(strDeleteIds.get(i));
+                    deleteIds.add(deleteId);
+                }
+                catch(NumberFormatException e){
+                    //何もしない
+                    System.out.println("tinko");
+                }
+            }
+            service.delete(deleteIds);
+        }else{
+            System.out.println("unko");
         }
         return "redirect:index";// 削除したらindexに移る
     }
@@ -87,10 +102,14 @@ public class TodoAppController {
 
     @RequestMapping(value = "/sort", method = RequestMethod.POST)
     String sort(@ModelAttribute TodoApp todoApp, Model model) {
-        System.out.println(todoApp.getSortArea());
-        System.out.println(" ");
-        List<TodoApp> sortResult =service.sort(todoApp.getSortArea());
+        if(todoApp.getSortArea() != null){
+            List<TodoApp> sortResult =service.sort(todoApp.getSortArea());
         model.addAttribute("todoList", sortResult);// ここの"todoList"というキーがindex.htmlで参照されている
         return "index";// 登録したらindexに移る
+        }else{
+            //処理なし
+        }
+        return "redirect:index";// 登録したらindexに移る
+        
     }
 }
