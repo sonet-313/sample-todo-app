@@ -32,13 +32,13 @@ public class TodoAppDao {
         return ++maxTodoId;
     }
 
-    public <T> void insert(int todoId, String title, String detail, Date date ) {
+    public <T> void insert(int todoId, String title, String detail, Date deadline ) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("todoId", todoId);
         paramMap.addValue("title", title);
         paramMap.addValue("detail", detail);
-        paramMap.addValue("date", date);
-        jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail, :date)", paramMap);
+        paramMap.addValue("deadline", deadline);
+        jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail, :deadline)", paramMap);
     }
 
     //ラジオボタンでチェックしたidのタスクをSQL文でデータベースから削除
@@ -53,20 +53,20 @@ public class TodoAppDao {
                 new MapSqlParameterSource(null), Integer.class);
         return rowCount;
     }
-
-    public void update(int todoId, String title, String detail, Date date) {
+    //更新
+    public void update(int todoId, String title, String detail, Date deadline) {
             MapSqlParameterSource paramMap = new MapSqlParameterSource();
             paramMap.addValue("todoId", todoId);
             paramMap.addValue("title", title);
             paramMap.addValue("detail", detail);
-            paramMap.addValue("date", date);
-            jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail, DEADLINE = :date WHERE TODO_ID = :todoId", paramMap);
+            paramMap.addValue("deadline", deadline);
+            jdbcTemplate.update("UPDATE TODO_APP SET TITLE = :title, DETAIL = :detail, DEADLINE = :deadline WHERE TODO_ID = :todoId", paramMap);
     }
 
 	public List<TodoApp> searchAll(String searchKeyword) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("searchKeyword", "%"+searchKeyword.toUpperCase()+"%");//大文字小文字区別せずに検索
-        List<TodoApp> searchResult = jdbcTemplate.query("SELECT * FROM TODO_APP WHERE UPPER(TODO_ID) LIKE :searchKeyword OR UPPER(TITLE) LIKE :searchKeyword OR UPPER(DETAIL) LIKE :searchKeyword", paramMap,
+        List<TodoApp> searchResult = jdbcTemplate.query("SELECT * FROM TODO_APP WHERE UPPER(TODO_ID) LIKE :searchKeyword OR UPPER(TITLE) LIKE :searchKeyword OR UPPER(DETAIL) LIKE :searchKeyword OR UPPER(DEADLINE) LIKE :searchKeyword", paramMap,
                 new TodoAppRowMapper());
 		return searchResult;
 	}
@@ -94,6 +94,14 @@ public class TodoAppDao {
                 new TodoAppRowMapper());
 		return searchResult;
         }
+
+        public List<TodoApp> searchDeadline(String searchKeyword) {
+                MapSqlParameterSource paramMap = new MapSqlParameterSource();
+                paramMap.addValue("searchKeyword", "%"+searchKeyword.toUpperCase()+"%");//大文字小文字区別せずに検索
+                List<TodoApp> searchResult = jdbcTemplate.query("SELECT * FROM TODO_APP WHERE UPPER(DEADLINE) LIKE :searchKeyword", paramMap,
+                        new TodoAppRowMapper());
+                        return searchResult;
+                }
         
         //並べ替え
         public List<TodoApp> sort(String sortArea) {
@@ -105,6 +113,10 @@ public class TodoAppDao {
                         return sortResult;
                 }else if(sortArea.equals("DETAIL")){
                         List<TodoApp> sortResult = jdbcTemplate.query("SELECT * FROM TODO_APP ORDER BY DETAIL", paramMap,
+                        new TodoAppRowMapper());
+                        return sortResult;
+                }else if(sortArea.equals("DEADLINE")){
+                        List<TodoApp> sortResult = jdbcTemplate.query("SELECT * FROM TODO_APP ORDER BY DEADLINE", paramMap,
                         new TodoAppRowMapper());
                         return sortResult;
                 }else{

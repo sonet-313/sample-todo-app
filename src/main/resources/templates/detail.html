@@ -11,7 +11,7 @@
 <body>
     <h1>New Todo</h1>
 
-    <form method="GET" action="./register">
+    <form method="GET" action="./register" >
         <ul>
             <li>
                 <label for="title">Title</label>
@@ -22,8 +22,8 @@
                 <textarea id="detail" type="text" name="detail" maxlength="100"></textarea>
             </li>
             <li>
-                <label for = "date">Date</label>
-                <input type="date" name = "date"></input>
+                <label for = "deadline">Date</label>
+                <input type="date" th:value="${todaysDate}" name = "deadline"></input>
             </li>
             <li><input class="button" type="submit" name="register" value="Register"></input></li>
         </ul>

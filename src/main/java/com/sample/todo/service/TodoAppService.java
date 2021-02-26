@@ -4,6 +4,7 @@ import java.util.*;
 import java.sql.Date;
 import com.sample.todo.dao.TodoAppDao;
 import com.sample.todo.entity.TodoApp;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class TodoAppService {
         return dao.getTodoAppList();
     }
 
-    public void register(String title, String detail, Date date) {
+    public void register(String title, String detail, Date deadline) {
         int rowCount = dao.getRowCount();
         // todoを全て削除するとNextIdが取得できなくなるエラーを回避するために1を渡す
         int nextId;
@@ -35,17 +36,23 @@ public class TodoAppService {
         } else{
             nextId = dao.getNextId();
         }
-        dao.insert(nextId, title, detail, date);
+        dao.insert(nextId, title, detail, deadline);
     }
 
-    public void delete(ArrayList<Integer> deleteId) {
-        for (int todoId : deleteId){
-            dao.delete(todoId);
+    public void delete(ArrayList<Integer> deleteIds) {
+        for (int deleteId : deleteIds){
+            dao.delete(deleteId);
         }
     }
+    //今日の日付を取得
+    public String getTodaysDate(){
+        java.util.Date today = new java.util.Date();
+        String todaysDate = new SimpleDateFormat("yyyy-MM-dd").format(today);
+        return todaysDate;
+    }
     //更新
-    public void update(int todoId, String title, String detail, Date date) {
-        dao.update(todoId, title, detail,date);
+    public void update(int todoId, String title, String detail, Date deadline) {
+        dao.update(todoId, title, detail,deadline);
     }
 
     //検索
@@ -58,6 +65,8 @@ public class TodoAppService {
             return dao.searchTitle(searchKeyword);
         }else if(searchArea.equals("Detail")){
             return dao.searchDetail(searchKeyword);
+        }else if(searchArea.equals("Deadline")){
+            return dao.searchDeadline(searchKeyword);
         }else{
             return null;
         }

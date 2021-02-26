@@ -16,7 +16,7 @@ public class TodoAppRowMapper implements RowMapper<TodoApp> {
         app.setTodoId(rs.getInt("TODO_ID"));
         app.setTitle(rs.getString("TITLE"));
         app.setDetail(rs.getString("DETAIL"));
-        app.setDate(rs.getDate("deadline"));
+        app.setDeadline(rs.getDate("deadline"));
         return app;
     }
 }

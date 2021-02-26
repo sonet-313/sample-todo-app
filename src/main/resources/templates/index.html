@@ -20,6 +20,7 @@
         <input type="radio" name="searchArea" value="#"/>#
         <input type="radio" name="searchArea" value="Title"/>Title
         <input type="radio" name="searchArea" value="Detail"/>Detail
+        <input type="radio" name="searchArea" value="Deadline"/>Deadline
         <div><input type="search" name="searchKeyword" placeholder="input search keyword"/>
             <input type="submit" name="submit" value="Search"/></div>
       </form>
@@ -28,6 +29,7 @@
         <input type="radio" name="sortArea" value="TODO_ID" checked = "checked"/>#
         <input type="radio" name="sortArea" value="TITLE"/>Title
         <input type="radio" name="sortArea" value="DETAIL"/>Detail
+        <input type="radio" name="sortArea" value="DEADLINE"/>Deadline
         <input type="submit" name="submit" value="Sort"/>
       </form>
     <table>
@@ -36,7 +38,7 @@
                 <th>#</th>
                 <th>Title</th>
                 <th>Detail</th>
-                <th>Date</th>
+                <th>Deadline</th>
             </tr>
         </thead>
         <tbody>
@@ -45,13 +47,13 @@
                 <td class="todo-id" th:text="${result['todoId']}"></td>
                 <td class="title" th:text="${result['title']}"></td>
                 <td class="detail" th:text="${result['detail']}"></td>
-                <td class="date" th:text="${result['date']}"></td>
+                <td class="deadline" th:text="${result['deadline']}"></td>
                 <td>
                     <form method="GET" action="/edit">
                         <input type="hidden" name="todoId" th:value="${result['todoId']}"></input>
                         <input type="hidden" name="title" th:value="${result['title']}"></input>
                         <input type="hidden" name="detail" th:value="${result['detail']}"></input>
-                        <input type="hidden" name="date" th:value="${result['date']}"></input>
+                        <input type="hidden" name="deadline" th:value="${result['deadline']}"></input>
                         <input type="submit" value="Edit"></input>
                     </form>
                 </td>
